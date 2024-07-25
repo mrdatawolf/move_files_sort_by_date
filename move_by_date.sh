@@ -36,6 +36,6 @@ for file in "$search_dir"/*; do
             mv "$file" "$dest_dir/$folder_name/"
         fi
     else
-        echo "file did not match formatting"
+        echo "Done"
     fi
 done
