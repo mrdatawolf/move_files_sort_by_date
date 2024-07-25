@@ -22,10 +22,10 @@ for file in "$search_dir"/*; do
         formatted_date_string="$year-$month-$day"
         folder_name=$(date -d$formatted_date_string "+%B_%Y")
         # Check if the file is from the current month
-        if [[ "$folder_name" == "$current_month_year" ]]; then
+        #if [[ "$folder_name" == "$current_month_year" ]]; then
             # If the file is from the current month, skip it
-            continue
-        fi
+        #    continue
+        #fi
         # Check if the folder exists in the dest_dir directory, if not create it
         if [[ ! -d "$dest_dir/$folder_name" ]]; then
             mkdir "$dest_dir/$folder_name"
