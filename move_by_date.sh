@@ -9,9 +9,10 @@ search_dir="/home/biztech/test"
 # Get the current month and year
 current_month_year=$(date "+%B_%Y")
 
+Echo "Gathering file names from $search_dir to put into sub folders of $dest_dir"
 # Loop through all files in the search directory
 for file in "$search_dir"/*; do
-    echo "checking on $file"
+    echo "Working with $file"
     # Only process files in the format "Stm_?? Daily Report *.*"
     if [[ $file =~ Stm_..[[:space:]]Daily[[:space:]]Report[[:space:]].* ]]; then
         # Extract the date from the end of the filename
@@ -29,13 +30,17 @@ for file in "$search_dir"/*; do
         # Check if the folder exists in the dest_dir directory, if not create it
         if [[ ! -d "$dest_dir/$folder_name" ]]; then
             mkdir "$dest_dir/$folder_name"
+            echo "Making a directory: $folder_name"
         fi
         # Check if the file already exists in the target folder
         if [[ ! -f "$dest_dir/$folder_name/$(basename "$file")" ]]; then
             # If the file doesn't exist, copy it to the target folder
             mv "$file" "$dest_dir/$folder_name/"
+        else 
+            echo "$file already exists in $dest_dir/$folder_name/"
         fi
     else
-        echo "Done"
+        echo "File doesn't match Stm_?? Daily Report *.*"
     fi
 done
+echo "Done"
